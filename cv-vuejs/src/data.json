@@ -1,0 +1,94 @@
+{
+    "profile": {
+        "name": "Hoàng Trịnh Anh Thái",
+        "img": "https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg",
+        "position": "Developer",
+        "birth": "24 - Feb - 1999",
+        "gender": "Femal" 
+    },
+    
+    "contact": {
+        "phone": "0774573448",
+        "email": "hoangtrinhanhthai@gmail.com",
+        "address": "Lien Chieu -Da Nang"
+    },
+    "skills": [
+        {
+            "id": 1,
+            "name": "HTML",
+            "percent": "90"
+        },
+        {
+            "id": 2,
+            "name": "CSS - JQuery",
+            "percent": "80"
+        },
+        {
+            "id": 3,
+            "name": "Photoshop",
+            "percent": "40"
+        },
+        {
+            "id": 4,
+            "name": "Javascript",
+            "percent": "70"
+        }
+    ],
+    "languages": [
+        {
+            "id": 1,
+            "name": "English"
+        },
+        {
+            "id": 2,
+            "name": "Japanese"
+        },
+        {
+            "id": 3,
+            "name": "Vietnamese"
+        }
+    ],
+    "achivements": [
+        {
+            "id": 1,
+            "content": "L rerum cum incidunt. Magni"
+        },
+        {
+            "id": 2,
+            "content": "Lorem lit. Quod laborum iusto illo veniam enim Voluptatibus"
+        }
+    ],
+    "educations": [
+        {
+            "id": 1,
+            "name": "Da Nang university of Science and Technology",
+            "period": "2017 - 2021",
+            "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam expedita cupiditate laquia repudiandae aut"
+        },
+        {
+            "id": 2,
+            "name": "iViettech",
+            "period": "2010 - 2021",
+            "content": "Lorem ipsum. Magnam expedita cupiditate laquia repudiandae aut"
+        }
+    ],
+    "experiences": [
+        {
+            "id": 1,
+            "name": "Experience 1",
+            "period": "2017 - 2021",
+            "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam expedita cupiditate laquia repudiandae aut"
+        },
+        {
+            "id": 2,
+            "name": "Experience 1",
+            "period": "2017 - 2021",
+            "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam expedita cupiditate laquia repudiandae aut"
+        }
+    ],
+    "interests" : [
+        "football",
+        "music", 
+        "travel"
+    ]
+}
