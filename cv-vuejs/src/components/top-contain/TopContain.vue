@@ -20,7 +20,7 @@
           <img :src="myJson.img" alt="" />
           <h2>{{ myJson.name }}</h2>
           <h3>Developer</h3>
-          <hr id="sure" />
+          <!-- <hr id="sure" /> -->
         </div>
       </div>
     </div>
@@ -54,7 +54,6 @@ export default {
 }
 
 .contain {
-  height: 25vh;
   background-color: var(--background-color);
 }
 
