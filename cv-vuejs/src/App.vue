@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <top-contain v-bind:myJson="myJson.profile" />
-    <main-contain v-bind:myJson="myJson" />
+    <top-contain v-bind:myJson="myJson.profile" v-bind:isEdit="isEdit" />
+    <main-contain v-bind:myJson="myJson" v-bind:isEdit="isEdit" />
+    <edit-comp />
   </div>
 </template>
 
@@ -9,16 +10,23 @@
 import json from "./data.json";
 import TopContain from "./components/top-contain/TopContain.vue";
 import MainContain from "./components/main-contain/MainContain.vue";
+import EditComponent from "./components/edit/EditComponent.vue";
 export default {
   name: "App",
   data() {
     return {
       myJson: json,
+      isEdit: false,
     };
   },
   components: {
     "top-contain": TopContain,
     "main-contain": MainContain,
+    "edit-comp": EditComponent,
+  },
+  mounted() {
+    localStorage.setItem("isEdit", false);
+    console.log("edit ne: ", this.isEdit);
   },
 };
 </script>
@@ -82,6 +90,41 @@ ul {
   margin: 0;
   padding: 0;
 }
+input {
+  border: none;
+  width: 95%;
+  background-color: white;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 700;
+  /* font-size: 1.1em; */
+  text-overflow: ellipsis;
+  padding: 0.5em;
+}
+
+.edit input {
+  border: 1px solid rgb(250, 245, 245);
+  border-radius: 10px;
+  margin-top: -1.5em;
+}
+
+.right-contain .edit li {
+  border: 1px solid rgb(226, 221, 221);
+  border-radius: 10px;
+  padding: 0.5em;
+  margin-bottom: 2em;
+}
+
+.left-contain input {
+  background-color: var(--background-color);
+  color: white;
+  border: 1px solid rgb(156, 153, 153);
+  border-radius: 10px;
+  margin-top: 1em;
+}
+
+.left-contain li {
+  /* margin-left: 80%; */
+}
 
 /* ---------------------RESPONSIVE---------------------------- */
 
@@ -99,8 +142,13 @@ ul {
 }
 
 @media screen and (max-width: 68.75em) {
+  img {
+    width: 30%;
+    height: 30%;
+  }
+
   .top-contain {
-    height: 50%;
+    height: 70%;
   }
   .top-contain .name {
     display: none;
@@ -116,10 +164,6 @@ ul {
     text-align: center;
   }
 
-  .main-contain {
-    /* margin-top: -5vh; */
-  }
-
   .right-contain {
     margin-top: -8vh;
   }
@@ -133,10 +177,11 @@ ul {
     text-align: center;
   }
 
-  .contain {
+  #app {
     width: 100%;
     padding: 0;
     margin: 0 auto;
+    background-color: white;
   }
 
   .main-contain {
@@ -171,11 +216,6 @@ ul {
 }
 
 @media screen and (max-width: 25.875em) {
-  img {
-    width: 50%;
-    height: 50%;
-  }
-
   .top-contain,
   .main-contain,
   #app {
@@ -189,6 +229,11 @@ ul {
 @media screen and (max-width: 68.75em) and (min-width: 64em) {
   #app {
     width: 85%;
+  }
+}
+@media screen and (min-width: 68.76em) {
+  .contain {
+    height: 25vh;
   }
 }
 </style>
