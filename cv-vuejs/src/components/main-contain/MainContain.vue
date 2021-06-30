@@ -1,7 +1,7 @@
 <template>
   <div class="main-contain">
-    <left-contain v-bind:myJson="myJson" />
-    <right-contain v-bind:myJson="myJson" />
+    <left-contain v-bind:myJson="myJson" v-bind:isEdit="isEdit" />
+    <right-contain v-bind:myJson="myJson" v-bind:isEdit="isEdit" />
   </div>
 </template>
 
@@ -10,10 +10,13 @@ import LeftContain from "./left-contain/LeftContain.vue";
 import RightContain from "./right-contain/RightContain.vue";
 export default {
   name: "main-contain",
-  props: ["myJson"],
+  props: ["myJson", "isEdit"],
   components: {
     "left-contain": LeftContain,
     "right-contain": RightContain,
+  },
+  data() {
+    return {};
   },
 };
 </script>

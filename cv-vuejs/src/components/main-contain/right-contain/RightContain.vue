@@ -1,8 +1,11 @@
 <template>
   <div class="right-contain">
     <div class="containR">
-      <education v-bind:educations="myJson.educations" />
-      <experience v-bind:experiences="myJson.experiences" />
+      <education v-bind:educations="myJson.educations" v-bind:isEdit="isEdit" />
+      <experience
+        v-bind:experiences="myJson.experiences"
+        v-bind:isEdit="isEdit"
+      />
       <div class="interest">
         <h2>Interest</h2>
         <hr />
@@ -23,7 +26,7 @@ import Education from "./Education.vue";
 import Experience from "./Experience.vue";
 export default {
   name: "right-contain",
-  props: ["myJson"],
+  props: ["myJson", "isEdit"],
   data() {
     return {};
   },

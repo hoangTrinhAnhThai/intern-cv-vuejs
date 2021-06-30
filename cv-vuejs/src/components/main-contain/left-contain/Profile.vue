@@ -3,7 +3,7 @@
     <h2>Profile</h2>
     <hr />
     <div class="information">
-      <div class="name">
+      <div class="fullname">
         <span><i class="bx bx-user"></i> {{ profile.name }}</span>
       </div>
       <div class="birth">

@@ -5,7 +5,10 @@
       <contact v-bind:contact="myJson.contact" />
       <skill v-bind:skills="myJson.skills" />
       <language v-bind:languages="myJson.languages" />
-      <achievement v-bind:achivements="myJson.achivements" />
+      <achievement
+        v-bind:achivements="myJson.achivements"
+        v-bind:isEdit="isEdit"
+      />
     </div>
   </div>
 </template>
@@ -19,7 +22,7 @@ import Achievement from "./Achievement.vue";
 
 export default {
   name: "left-contain",
-  props: ["myJson"],
+  props: ["myJson", "isEdit"],
   data() {
     return {};
   },
