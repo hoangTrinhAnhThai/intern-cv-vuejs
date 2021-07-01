@@ -2,7 +2,10 @@
   <div id="app">
     <top-contain v-bind:myJson="myJson.profile" v-bind:isEdit="isEdit" />
     <main-contain v-bind:myJson="myJson" v-bind:isEdit="isEdit" />
-    <edit-comp />
+    <edit-comp
+      v-on:changeSaveEvent="handleSave"
+      v-on:changeEditEvent="handleEdit"
+    />
   </div>
 </template>
 
@@ -24,9 +27,14 @@ export default {
     "main-contain": MainContain,
     "edit-comp": EditComponent,
   },
-  mounted() {
-    localStorage.setItem("isEdit", false);
-    console.log("edit ne: ", this.isEdit);
+
+  methods: {
+    handleEdit() {
+      this.isEdit = true;
+    },
+    handleSave() {
+      this.isEdit = false;
+    },
   },
 };
 </script>

@@ -1,10 +1,10 @@
 <template>
   <div class="edit-component">
     <div class="edit-btn">
-      <button v-on:click="edit" class="edit">EDIT</button>
+      <button v-on:click="handleEdit" class="edit">EDIT</button>
     </div>
     <div class="save-btn">
-      <button>SAVE</button>
+      <button v-on:click="handleSave">SAVE</button>
     </div>
   </div>
 </template>
@@ -12,15 +12,14 @@
 <script>
 export default {
   data() {
-    return {
-      isEdit: false,
-    };
+    return {};
   },
   methods: {
-    edit() {
-      console.log("chua bam", localStorage.getItem("isEdit"));
-      localStorage.setItem("isEdit", true);
-      console.log("bam roi", localStorage.getItem("isEdit"));
+    handleEdit() {
+      this.$emit("changeEditEvent");
+    },
+    handleSave() {
+      this.$emit("changeSaveEvent");
     },
   },
 };
