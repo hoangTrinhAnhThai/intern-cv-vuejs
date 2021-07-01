@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  props: [
+    "infJson"
+  ],
   data() {
     return {};
   },
@@ -19,7 +22,17 @@ export default {
       this.$emit("changeEditEvent");
     },
     handleSave() {
+      var deleteArr = [];
+      for(var i = 0; i < this.infJson.length; i++) {
+        if(this.infJson[i].delete_flag == true) {
+          deleteArr.push(this.infJson[i]);
+          
+        }
+      }
+
+
       this.$emit("changeSaveEvent");
+
     },
   },
 };

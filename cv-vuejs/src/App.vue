@@ -1,10 +1,19 @@
 <template>
   <div id="app">
     <top-contain v-bind:myJson="myJson.profile" v-bind:isEdit="isEdit" />
-    <main-contain v-bind:myJson="myJson" v-bind:isEdit="isEdit" />
+    <main-contain
+      v-bind:myJson="myJson"
+      v-bind:isEdit="isEdit"
+      v-bind:infJson="infJson"
+      v-bind:newInfs="newInfs"
+      v-on:deleteInfA="deleteInf"
+      v-on:addNewInfA="addNewInf"
+    />
     <edit-comp
       v-on:changeSaveEvent="handleSave"
       v-on:changeEditEvent="handleEdit"
+      v-bind:infJson="infJson"
+      v-bind:newInfs="newInfs"
     />
   </div>
 </template>
@@ -20,6 +29,9 @@ export default {
     return {
       myJson: json,
       isEdit: false,
+      infJson: null,
+      newInfs: [],
+      deleteArr: [],
     };
   },
   components: {
@@ -34,7 +46,28 @@ export default {
     },
     handleSave() {
       this.isEdit = false;
+      console.log(this.infJson);
     },
+    deleteInf(id) {
+      for (var i = 0; i < this.infJson.length; i++) {
+        if (id == this.infJson[i].id) {
+          this.infJson[i].delete_flag = true;
+          this.infJson.splice(i, 1);
+          this.deleteArr.push(this.infJson[i]);
+          break;
+        }
+      }
+    },
+    addNewInf(data) {
+      console.log("ok ne");
+      this.newInfs.push(data);
+    },
+  },
+  async created() {
+    this.axios.get("/").then((response) => {
+      this.infJson = response.data;
+      console.log(this.infJson);
+    });
   },
 };
 </script>
@@ -110,9 +143,13 @@ input {
 }
 
 .edit input {
-  border: 1px solid rgb(250, 245, 245);
+  border: 1px solid rgb(196, 191, 191);
   border-radius: 10px;
   margin-top: -1.5em;
+  font-size: 0.9em;
+}
+.edit i {
+  font-size: 1.5em;
 }
 
 .right-contain .edit li {

@@ -1,11 +1,20 @@
 <template>
   <div class="right-contain">
     <div class="containR">
-      <education v-bind:educations="myJson.educations" v-bind:isEdit="isEdit" />
-      <experience
+      <!-- <education v-bind:educations="myJson.educations" v-bind:isEdit="isEdit" /> -->
+      <!-- <experience
         v-bind:experiences="myJson.experiences"
         v-bind:isEdit="isEdit"
+      /> -->
+
+      <inf
+        v-bind:isEdit="isEdit"
+        v-on:deleteInfR="deleteInf"
+        v-on:addNewInfR="addNewInf"
+        v-bind:infJson="infJson"
+        v-bind:newInfs="newInfs"
       />
+
       <div class="interest">
         <h2>Interest</h2>
         <hr />
@@ -22,18 +31,29 @@
 </template>
 
 <script>
-import Education from "./Education.vue";
-import Experience from "./Experience.vue";
+// import Education from "./Education.vue";
+// import Experience from "./Experience.vue";
+import Inf from "./InfoComp.vue";
 export default {
   name: "right-contain",
-  props: ["myJson", "isEdit"],
+  props: ["myJson", "isEdit", "infJson", "newInfs"],
   data() {
     return {};
   },
+  methods: {
+    deleteInf(id) {
+      console.log("R", id);
+      this.$emit("deleteInfM", id);
+    },
+    addNewInf(data) {
+      this.$emit("addNewInfM", data);
+    },
+  },
 
   components: {
-    Education,
-    Experience,
+    // Education,
+    // Experience,
+    Inf,
   },
 };
 </script>
