@@ -4,13 +4,13 @@
     <hr />
     <ul class="edit" v-show="isEdit">
       <li v-for="i in educations" :key="i.id">
-        <h5>
+        <h3>
           <input type="text" v-model="i.name" />
-        </h5>
+        </h3>
 
-        <h6>
+        <h4>
           <input type="text" v-model="i.period" />
-        </h6>
+        </h4>
         <p>
           <input type="text" v-model="i.content" />
         </p>
@@ -19,14 +19,14 @@
     </ul>
     <ul v-show="!isEdit">
       <li v-for="i in educations" :key="i.id">
-        <h5>
+        <h3>
           <i class="bx bx-book"></i>
           {{ i.name }}
-        </h5>
+        </h3>
 
-        <h6>
+        <h4>
           {{ i.period }}
-        </h6>
+        </h4>
         <p>
           {{ i.content }}
         </p>
