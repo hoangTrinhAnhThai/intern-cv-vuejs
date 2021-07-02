@@ -1,15 +1,29 @@
 <template>
   <div id="app">
     <top-contain v-bind:myJson="myJson.profile" v-bind:isEdit="isEdit" />
-    <main-contain v-bind:myJson="myJson" v-bind:isEdit="isEdit" />
+    <main-contain
+      v-bind:myJson="myJson"
+      v-bind:isEdit="isEdit"
+      v-bind:infJson="infJson"
+      v-bind:newInfs="newInfs"
+      v-on:deleteInfA="deleteInf"
+      v-on:addNewInfA="addNewInf"
+    />
+    <span style="text-align: center; color: red" v-show="requireNotNull"
+      >Khong duoc bo trong</span
+    >
     <edit-comp
       v-on:changeSaveEvent="handleSave"
       v-on:changeEditEvent="handleEdit"
+      v-bind:infJson="infJson"
+      v-bind:newInfs="newInfs"
+      v-bind:deleteArr="deleteArr"
     />
   </div>
 </template>
 
 <script>
+// import Get from "DataConnect";
 import json from "./data.json";
 import TopContain from "./components/top-contain/TopContain.vue";
 import MainContain from "./components/main-contain/MainContain.vue";
@@ -20,6 +34,10 @@ export default {
     return {
       myJson: json,
       isEdit: false,
+      infJson: null,
+      newInfs: [],
+      deleteArr: [],
+      requireNotNull: null,
     };
   },
   components: {
@@ -32,9 +50,33 @@ export default {
     handleEdit() {
       this.isEdit = true;
     },
-    handleSave() {
-      this.isEdit = false;
+    handleSave(requireNotNull) {
+      if (requireNotNull) {
+        this.requireNotNull = true;
+      } else {
+        this.requireNotNull = false;
+        this.isEdit = false;
+      }
     },
+    deleteInf(id) {
+      for (var i = 0; i < this.infJson.length; i++) {
+        if (id == this.infJson[i].id) {
+          this.infJson[i].delete_flag = true;
+          this.deleteArr.push(this.infJson.splice(i, 1));
+          break;
+        }
+      }
+    },
+    addNewInf(data) {
+      this.newInfs.push(data);
+    },
+  },
+  mounted() {
+    this.requireNotNull = false;
+    this.axios.get("/").then((response) => {
+      this.infJson = response.data;
+      console.log(this.infJson);
+    });
   },
 };
 </script>
@@ -110,9 +152,13 @@ input {
 }
 
 .edit input {
-  border: 1px solid rgb(250, 245, 245);
+  border: 1px solid rgb(196, 191, 191);
   border-radius: 10px;
   margin-top: -1.5em;
+  font-size: 0.9em;
+}
+.edit i {
+  font-size: 1.5em;
 }
 
 .right-contain .edit li {
@@ -130,8 +176,8 @@ input {
   margin-top: 1em;
 }
 
-.left-contain li {
-  /* margin-left: 80%; */
+.edit h2 input {
+  margin-top: -2em;
 }
 
 /* ---------------------RESPONSIVE---------------------------- */

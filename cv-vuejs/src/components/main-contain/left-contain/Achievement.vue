@@ -2,13 +2,13 @@
   <div class="achievement">
     <h2>Achievements</h2>
     <hr />
-    <p v-show="!isEdit" v-for="i in achivements" :key="i.id">{{ i.content }}</p>
-
+    <!-- <p v-for="i in achivements" :key="i.id">{{ i.content }}</p> -->
     <span class="edit black" v-show="isEdit">
       <ul>
         <li v-for="i in achivements" :key="i.id">
-          <input type="text" v-model="i.content" />
-          <i class="bx bx-trash"></i><i class="bx bx-plus-circle"></i>
+          {{ i.content }}
+          <!-- <input type="text" v-model="i.content" /> -->
+          <!-- <i class="bx bx-trash"></i><i class="bx bx-plus-circle"></i> -->
         </li>
       </ul>
     </span>
