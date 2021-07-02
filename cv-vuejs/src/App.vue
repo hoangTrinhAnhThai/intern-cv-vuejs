@@ -14,11 +14,13 @@
       v-on:changeEditEvent="handleEdit"
       v-bind:infJson="infJson"
       v-bind:newInfs="newInfs"
+      v-bind:deleteArr="deleteArr"
     />
   </div>
 </template>
 
 <script>
+// import Get from "DataConnect";
 import json from "./data.json";
 import TopContain from "./components/top-contain/TopContain.vue";
 import MainContain from "./components/main-contain/MainContain.vue";
@@ -32,6 +34,7 @@ export default {
       infJson: null,
       newInfs: [],
       deleteArr: [],
+      url: "https://cv-php-api.herokuapp.com",
     };
   },
   components: {
@@ -44,27 +47,26 @@ export default {
     handleEdit() {
       this.isEdit = true;
     },
-    handleSave() {
+    handleSave(arr1, arr2) {
       this.isEdit = false;
-      console.log(this.infJson);
+      this.deleteArr = arr1;
+      this.newInfs = arr2;
     },
     deleteInf(id) {
       for (var i = 0; i < this.infJson.length; i++) {
         if (id == this.infJson[i].id) {
           this.infJson[i].delete_flag = true;
-          this.infJson.splice(i, 1);
-          this.deleteArr.push(this.infJson[i]);
+          this.deleteArr.push(this.infJson.splice(i, 1));
           break;
         }
       }
     },
     addNewInf(data) {
-      console.log("ok ne");
       this.newInfs.push(data);
     },
   },
-  async created() {
-    this.axios.get("/").then((response) => {
+  mounted() {
+    this.axios.get(`${this.url}/`).then((response) => {
       this.infJson = response.data;
       console.log(this.infJson);
     });
@@ -167,8 +169,8 @@ input {
   margin-top: 1em;
 }
 
-.left-contain li {
-  /* margin-left: 80%; */
+.edit h2 input {
+  margin-top: -2em;
 }
 
 /* ---------------------RESPONSIVE---------------------------- */

@@ -11,28 +11,36 @@
 
 <script>
 export default {
-  props: [
-    "infJson"
-  ],
+  props: ["infJson", "deleteArr", "newInfs"],
   data() {
-    return {};
+    return {
+      url: "https://cv-php-api.herokuapp.com",
+    };
   },
   methods: {
     handleEdit() {
       this.$emit("changeEditEvent");
     },
     handleSave() {
-      var deleteArr = [];
-      for(var i = 0; i < this.infJson.length; i++) {
-        if(this.infJson[i].delete_flag == true) {
-          deleteArr.push(this.infJson[i]);
-          
-        }
-      }
+      console.log("save-update", this.infJson);
+      console.log("save-delete", this.deleteArr);
+      console.log("save-add", this.newInfs);
+      // for(var i = 0; i <this.infJson.length; i++ ) {
 
+      // }
 
-      this.$emit("changeSaveEvent");
+      this.axios.post(`${this.url}/`, this.newInfs).then((response) => {
+        console.log("add", response);
+      });
 
+      this.axios.put(`${this.url}/`, this.infJson).then((response) => {
+        console.log("update", response);
+      });
+
+      this.axios.delete(`${this.url}/`, this.deleteArr).then((response) => {
+        console.log("delete", response);
+      });
+      this.$emit("changeSaveEvent", [], []);
     },
   },
 };

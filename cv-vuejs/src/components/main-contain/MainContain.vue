@@ -27,7 +27,6 @@ export default {
   },
   methods: {
     deleteInf(id) {
-      console.log("M", id);
       this.$emit("deleteInfA", id);
     },
     addNewInf(data) {
