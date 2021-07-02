@@ -9,9 +9,6 @@
       v-on:deleteInfA="deleteInf"
       v-on:addNewInfA="addNewInf"
     />
-    <span style="text-align: center; color: red" v-show="requireNotNull"
-      >Khong duoc bo trong</span
-    >
     <edit-comp
       v-on:changeSaveEvent="handleSave"
       v-on:changeEditEvent="handleEdit"
@@ -53,6 +50,7 @@ export default {
     handleSave(requireNotNull) {
       if (requireNotNull) {
         this.requireNotNull = true;
+        window.alert("Vui lòng không được bỏ trống Type và Title");
       } else {
         this.requireNotNull = false;
         this.isEdit = false;
