@@ -9,6 +9,9 @@
       v-on:deleteInfA="deleteInf"
       v-on:addNewInfA="addNewInf"
     />
+    <span style="text-align: center; color: red" v-show="requireNotNull"
+      >Khong duoc bo trong</span
+    >
     <edit-comp
       v-on:changeSaveEvent="handleSave"
       v-on:changeEditEvent="handleEdit"
@@ -34,7 +37,7 @@ export default {
       infJson: null,
       newInfs: [],
       deleteArr: [],
-      url: "https://cv-php-api.herokuapp.com",
+      requireNotNull: null,
     };
   },
   components: {
@@ -47,10 +50,13 @@ export default {
     handleEdit() {
       this.isEdit = true;
     },
-    handleSave(arr1, arr2) {
-      this.isEdit = false;
-      this.deleteArr = arr1;
-      this.newInfs = arr2;
+    handleSave(requireNotNull) {
+      if (requireNotNull) {
+        this.requireNotNull = true;
+      } else {
+        this.requireNotNull = false;
+        this.isEdit = false;
+      }
     },
     deleteInf(id) {
       for (var i = 0; i < this.infJson.length; i++) {
@@ -66,7 +72,8 @@ export default {
     },
   },
   mounted() {
-    this.axios.get(`${this.url}/`).then((response) => {
+    this.requireNotNull = false;
+    this.axios.get("/").then((response) => {
       this.infJson = response.data;
       console.log(this.infJson);
     });

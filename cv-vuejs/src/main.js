@@ -3,7 +3,7 @@ import App from './App.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 // import './DataConnect'
-// import './axios'
+import './axios'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
