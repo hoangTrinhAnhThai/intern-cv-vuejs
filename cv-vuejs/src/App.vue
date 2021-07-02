@@ -54,6 +54,7 @@ export default {
       } else {
         this.requireNotNull = false;
         this.isEdit = false;
+        // this.$router.go();
       }
     },
     deleteInf(id) {
@@ -72,8 +73,8 @@ export default {
   mounted() {
     this.requireNotNull = false;
     this.axios.get("/").then((response) => {
+      console.log(response.data);
       this.infJson = response.data;
-      console.log(this.infJson);
     });
   },
 };

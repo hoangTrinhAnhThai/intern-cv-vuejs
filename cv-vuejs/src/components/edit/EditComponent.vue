@@ -12,20 +12,12 @@
 <script>
 export default {
   props: ["infJson", "deleteArr", "newInfs"],
-  data() {
-    return {
-      url: "https://cv-php-api.herokuapp.com",
-    };
-  },
   methods: {
     handleEdit() {
       this.$emit("changeEditEvent");
     },
     handleSave() {
       let requireNotNull = false;
-      console.log("save-update", this.infJson);
-      console.log("save-delete", this.deleteArr);
-      console.log("save-add", this.newInfs);
       for (let i = 0; i < this.infJson.length; i++) {
         console.log(this.infJson[i].type);
         if (this.infJson[i].type == null || this.infJson[i].title == null) {
@@ -42,7 +34,6 @@ export default {
           break;
         }
       }
-      console.log(requireNotNull);
       if (requireNotNull) {
         this.$emit("changeSaveEvent", requireNotNull);
       } else {
@@ -57,9 +48,15 @@ export default {
           });
         }
         if (this.deleteArr.length != 0) {
-          this.axios.delete("/", this.deleteArr).then((response) => {
-            console.log("delete", response);
-          });
+          console.log("PARAMS DELETE", this.deleteArr);
+          for (let index = 0; index < this.deleteArr.length; index++) {
+            // const element = array[index];
+            this.axios
+              .delete("/", { data: this.deleteArr[index] })
+              .then((response) => {
+                console.log("delete", response);
+              });
+          }
         }
         this.$emit("changeSaveEvent", requireNotNull);
       }
